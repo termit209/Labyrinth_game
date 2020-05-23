@@ -1,6 +1,5 @@
 
 import numpy as np
-from data.database import * 
 
 step_by_command = {'go up':np.array((-2, 0)), 'go down':np.array((2, 0)), 
                      'go left':np.array((0, -2)), 'go right':np.array((0, 2)),
@@ -10,7 +9,12 @@ dict_icon_labyrinth_object = {'wall':'W',
                               'monolith':'M',
                               'treasure':'T',
                               'hole':'H',
-                              'exit':'E'}
+                              'exit':'E',
+                              'free_cell': ' ',
+                              'river':'R'}
+
+next_cell = {'up':np.array((-1, 0)), 'down':np.array((1, 0)), 
+                     'left':np.array((0, -1)), 'right':np.array((0, 1)),}
 
 short_command_dict = {'u':'go up', 'd':'go down', 
                      'l':'go left', 'r':'go right',
