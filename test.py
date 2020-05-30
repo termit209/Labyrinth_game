@@ -5,7 +5,7 @@ from interface.CLI import CLInteface
 from objects.Game import Game
 from objects.Game import Game
 
-test = 'game'
+test = 'CLI'
 
 if test == 'lab':
     from objects.Labyrinth import Labyrinth
@@ -27,7 +27,7 @@ elif  test == 'player':
     print(test_player.coordinate_location)
     test_player.change_sate_by_step('keep')
     print(test_player.coordinate_location)
-    test_player.change_coordimate_rier([(1, 1), (2, 1), (3, 1)])
+    test_player.change_coordimate_river([(1, 1), (2, 1), (3, 1)])
     print(test_player.coordinate_location)
 
 elif test == 'checker':
@@ -62,3 +62,8 @@ elif test == 'game':
             test_game.show_map()
         else:
             test_game.step_player(command)
+
+
+if test == "CLI":
+    test_int = CLInteface()
+    test_int.main_menu()

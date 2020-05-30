@@ -6,10 +6,10 @@ step_by_command = {'go up':np.array((-1, 0)), 'go down':np.array((1, 0)),
                      'keep':np.array((0, 0))}
 
 class Player():
-    def __init__(self, location, inventory, healf):
+    def __init__(self, location, inventory, health):
         self.inventory = inventory
         self.coordinate_location = location
-        self.healf = healf
+        self.health = health
     
     def random_random_step(self):
         step_command = random.choice(list(step_by_command.keys()))
@@ -30,19 +30,10 @@ class Player():
     def get_state(self):
         return {'coordinate_location':self.coordinate_location, 'inventory':self.inventory}
     
-    def change_coordimate_river(self, river_coordinates):
+    def change_coordinate_river(self, river_coordinates):
         current_river_index = river_coordinates.index(self.coordinate_location)
         lenght_river = len(river_coordinates)
         next_rivercell_index = current_river_index + 2
         if next_rivercell_index >= lenght_river:
             next_rivercell_index = lenght_river - 1
         self.coordinate_location = np.array((river_coordinates[next_rivercell_index]))
-
-
-if __name__ == '__main__':
-    test_player = Player(np.array((3, 1)), [], 3)
-    print(test_player.coordinate_location)
-    test_player.change_sate_by_step('keep')
-    print(test_player.coordinate_location)
-    test_player.change_coordimate_rier([(1, 1), (2, 1), (3, 1)])
-    print(test_player.coordinate_location)

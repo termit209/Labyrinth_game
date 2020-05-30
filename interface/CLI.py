@@ -34,23 +34,27 @@ class CLInteface:
         size_list = list(range(global_config_dict['min_labyrinth_size'], global_config_dict['max_labyrinth_size']+1))
         standart_start_config['size'] = int(self.check_user_input([str(i) for i in size_list]))
         game = Game(standart_start_config)
+        game.create_game()
         game_finish = False
         while not game_finish:
             command = self.check_user_input(gameplay_possible_command)
             if command == 'cheatcode':
-                print('(^_-)')
+                print('(^_-)' + '\n')
                 game.show_map()
             elif command == 'save':
                 pass
             elif command == 'finish':
                 game_finish = True
             elif command in short_command_dict:
-                game.step(short_command_dict[command])
+                game.turn(short_command_dict[command])
             else:
-                game.step(command)
+                game.turn(command)
             game_finish |= game.game_end
-        print('\(^_^)/ ', 'Congratulation ', sep='\n')
-    
+        if game.game_result == 'win':
+            print('\(^_^)/ ', 'Congratulation ', sep='\n')
+        else:
+            print('(╯︵╰,) ', 'Lose, try again next time ', sep='\n')
+
     def main_menu(self):
         print('\n', '(^_^)/')
         print("Hello player!")
@@ -62,8 +66,3 @@ class CLInteface:
             pass
         else:
             print('(u_u)/', 'See you again!')
-
-
-if __name__ == "__main__":
-    test_int = CLInteface()
-    test_int.main_menu()

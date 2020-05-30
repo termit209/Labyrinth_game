@@ -24,6 +24,6 @@ global_config_dict = {'max_labyrinth_size':10,
                       'min_labyrinth_size':4,
                       'num_holes':5}
 
-standart_start_config = {'num_holes':5, 'inventory':[], 'objects':{}}
+standart_start_config = {'num_holes':5, 'inventory':[], 'objects':{}, 'lenght_river':4, 'health':3}
 
 gameplay_possible_command = list(step_by_command.keys()) + ['finish', 'cheatcode', 'save'] + list(short_command_dict.keys())

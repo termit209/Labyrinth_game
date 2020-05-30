@@ -6,10 +6,18 @@ from  objects.Labyrinth import Labyrinth
 from objects.Checker import Checker
 from data.database import *
 
+
 class Game():
     def __init__(self, config):
         self.config = config
         self.game_end = False
+        self.game_result = 'win'
+
+    def create_game(self):
+        self.create_labyrinth()
+        self.create_cheker()
+        self.create_player()
+        self.create_bear()
 
     def create_labyrinth(self):
         self.game_labyrinth = Labyrinth(self.config['size'], {})
@@ -31,6 +39,15 @@ class Game():
     def create_bear(self):
         self.bear = Player(self.game_labyrinth.get_free_cell(), {}, 1)
 
+    def turn(self, command):
+        self.step_player(command)
+        self.step_bear()
+        self.meeting_bear()
+        if not self.is_alive():
+            self.game_end = True
+            self.game_result = 'lose'
+        
+
     def step_player(self, command):
         command_possible, command_respond = self.checker.check_command(command, self.player)
         print(command_respond)
@@ -51,8 +68,8 @@ class Game():
                 self.game_end = True
             river_coordinates = self.game_labyrinth.dict_object['river'].coordinates
             if list(self.player.coordinate_location) in [list(i) for i in river_coordinates]:
-                self.player.change_coordimate_rier(river_coordinates)
-            self.step_bear()
+                self.player.change_coordinate_river(river_coordinates)
+
 
     def step_bear(self):
         command_possible = False
@@ -67,7 +84,7 @@ class Game():
             self.bear.change_sate_by_step(random_step_command)
         river_coordinates = self.game_labyrinth.dict_object['river'].coordinates
         if list(self.bear.coordinate_location) in [list(i) for i in river_coordinates]:
-            self.bear.change_coordimate_rier(river_coordinates)
+            self.bear.change_coordinate_river(river_coordinates)
 
     def show_map(self):
         map_labyrinth = np.copy(self.game_labyrinth.map_labyrinth)
@@ -77,18 +94,17 @@ class Game():
         map_labyrinth[coordin_bear[0]][coordin_bear[1]] = 'B'
         print(map_labyrinth)
 
-    def meet_bear(self):
-        pass
+    def meeting_bear(self):
+        bear_location = self.bear.coordinate_location
+        player_location = self.player.coordinate_location
+        if np.sum(bear_location - player_location) < 0:
+            self.damage()
+            print('damage from bear')
+    
+    def damage(self):
+        self.player.health -= 1
 
-if __name__ == '__main__':
-    test_config = {'size':4, 'num_holes':3, 'inventory':[], 'objects':{}}
-    test_game = Game(test_config)
-    print(test_game.game_lab.map_labyrinth)
-    command = ''
-    while command != 'stop':
-        command = input ()
-        if command == 'h':
-            print(test_game.player.coordinate_location, test_game.player.inventory)
-        else:
-            test_game.step(command)
+    def is_alive(self):
+        return self.player.health < 1
+
 
