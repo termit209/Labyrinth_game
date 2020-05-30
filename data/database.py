@@ -1,9 +1,9 @@
 
 import numpy as np
 
-step_by_command = {'go up':np.array((-2, 0)), 'go down':np.array((2, 0)), 
-                     'go left':np.array((0, -2)), 'go right':np.array((0, 2)),
-                     'keep':np.array((0, 0))}
+step_by_command = {'go up':np.array((-1, 0)), 'go down':np.array((1, 0)), 
+                     'go left':np.array((0, -1)), 'go right':np.array((0, 1)),
+                     'keep':np.array((0, 0)), 'show map':np.array((0, 0))}
 
 dict_icon_labyrinth_object = {'wall':'W',
                               'monolith':'M',
@@ -18,7 +18,7 @@ next_cell = {'up':np.array((-1, 0)), 'down':np.array((1, 0)),
 
 short_command_dict = {'u':'go up', 'd':'go down', 
                      'l':'go left', 'r':'go right',
-                     'k':'keep'}
+                     'k':'keep', 'm':'show map'}
 
 global_config_dict = {'max_labyrinth_size':10,
                       'min_labyrinth_size':4,

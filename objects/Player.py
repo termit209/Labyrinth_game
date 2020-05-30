@@ -6,7 +6,7 @@ step_by_command = {'go up':np.array((-1, 0)), 'go down':np.array((1, 0)),
                      'keep':np.array((0, 0))}
 
 class Player():
-    def __init__(self, location, inventory, healf=2):
+    def __init__(self, location, inventory, healf):
         self.inventory = inventory
         self.coordinate_location = location
         self.healf = healf
@@ -19,7 +19,7 @@ class Player():
         self.coordinate_location += step_by_command[command]
 
     def change_location_by_teleport(self, coordinates_holes):
-        current_hole_ind = coordinates_holes.index(tuple(self.coordinate_location))
+        current_hole_ind = coordinates_holes.index(self.coordinate_location)
         number_holes = len(coordinates_holes)
         next_hole_coordinate = (current_hole_ind + 1) % number_holes
         self.coordinate_location = np.array((coordinates_holes[next_hole_coordinate]))
@@ -30,13 +30,19 @@ class Player():
     def get_state(self):
         return {'coordinate_location':self.coordinate_location, 'inventory':self.inventory}
     
-    def change_coordimate_rier(self, river_coorfinate):
-        pass
+    def change_coordimate_river(self, river_coordinates):
+        current_river_index = river_coordinates.index(self.coordinate_location)
+        lenght_river = len(river_coordinates)
+        next_rivercell_index = current_river_index + 2
+        if next_rivercell_index >= lenght_river:
+            next_rivercell_index = lenght_river - 1
+        self.coordinate_location = np.array((river_coordinates[next_rivercell_index]))
+
 
 if __name__ == '__main__':
-    test_player = Player(np.array((1, 1)), [])
+    test_player = Player(np.array((3, 1)), [], 3)
     print(test_player.coordinate_location)
-    test_player.change_sate_by_step('go down')
+    test_player.change_sate_by_step('keep')
     print(test_player.coordinate_location)
-    test_player.change_state_by_teleport([(1, 1), (3, 1)])
+    test_player.change_coordimate_rier([(1, 1), (2, 1), (3, 1)])
     print(test_player.coordinate_location)
