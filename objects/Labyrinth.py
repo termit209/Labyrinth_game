@@ -1,22 +1,12 @@
 
 import random
 import numpy as np
-import sys
+
 
 
 
 from data.database import dict_icon_labyrinth_object, next_cell
 
-#dict_icon_labyrinth_object = {'wall':'W',
-#                              'monolith':'M',
-#                              'treasure':'T',
-#                              'hole':'H',
-#                              'exit':'E',
-#                              'free_cell': ' ',
-#                              'river':'R'}
-
-#next_cell = {'up':np.array((-1, 0)), 'down':np.array((1, 0)), 
-#                     'left':np.array((0, -1)), 'right':np.array((0, 1)),}
 
 class River():
     def __init__(self, list_coordinates):
@@ -113,7 +103,6 @@ class Labyrinth():
             for dirrection in dirrections:
                 last_coordinate = coordinates[-1]
                 candidate_coordinate = last_coordinate + next_cell[dirrection]
-                #candidate_coordinate = (last_coordinate[0] + next_cell[dirrection][0], last_coordinate[1] + next_cell[dirrection][1])
                 if self.is_cell_free(candidate_coordinate):
                     coordinates.append(candidate_coordinate)
                     break
