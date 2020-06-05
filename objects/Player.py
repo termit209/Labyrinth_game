@@ -19,7 +19,7 @@ class Player():
         self.coordinate_location += step_by_command[command]
 
     def change_location_by_teleport(self, coordinates_holes):
-        current_hole_ind = coordinates_holes.index(self.coordinate_location)
+        current_hole_ind = [list(i) for i in coordinates_holes].index(list(self.coordinate_location))
         number_holes = len(coordinates_holes)
         next_hole_coordinate = (current_hole_ind + 1) % number_holes
         self.coordinate_location = np.array((coordinates_holes[next_hole_coordinate]))
@@ -31,7 +31,7 @@ class Player():
         return {'coordinate_location':self.coordinate_location, 'inventory':self.inventory}
     
     def change_coordinate_river(self, river_coordinates):
-        current_river_index = river_coordinates.index(self.coordinate_location)
+        current_river_index = [list(i) for i in river_coordinates].index(list(self.coordinate_location))
         lenght_river = len(river_coordinates)
         next_rivercell_index = current_river_index + 2
         if next_rivercell_index >= lenght_river:
