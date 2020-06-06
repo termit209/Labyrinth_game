@@ -1,16 +1,14 @@
 import numpy as np
-#from data.database import step_by_command
+from data.database import step_by_command
 import random
-step_by_command = {'go up':np.array((-1, 0)), 'go down':np.array((1, 0)), 
-                     'go left':np.array((0, -1)), 'go right':np.array((0, 1)),
-                     'keep':np.array((0, 0))}
+
 
 class Player():
     def __init__(self, location, inventory, health):
         self.inventory = inventory
         self.coordinate_location = location
         self.health = health
-    
+
     def random_random_step(self):
         step_command = random.choice(list(step_by_command.keys()))
         return step_command
@@ -37,3 +35,4 @@ class Player():
         if next_rivercell_index >= lenght_river:
             next_rivercell_index = lenght_river - 1
         self.coordinate_location = np.array((river_coordinates[next_rivercell_index]))
+

@@ -6,9 +6,8 @@ from objects.Labyrinth import Labyrinth
 
 
 class Checker():
-    def __init__(self, labyrinth):
-        self.map_labyrinth = labyrinth.map_labyrinth
-        self.dict_lab_object = labyrinth.dict_object
+    def __init__(self, map_labyrinth):
+        self.map_labyrinth = map_labyrinth
 
     def cell_after_command(self, command, player):
         command_step = step_by_command[command]

@@ -11,7 +11,9 @@ dict_icon_labyrinth_object = {'wall':'W',
                               'hole':'H',
                               'exit':'E',
                               'free_cell': ' ',
-                              'river':'R'}
+                              'river':'R',
+                              'bear':'B',
+                              'Player':'P'}
 
 next_cell = {'up':np.array((-1, 0)), 'down':np.array((1, 0)), 
                      'left':np.array((0, -1)), 'right':np.array((0, 1)),}

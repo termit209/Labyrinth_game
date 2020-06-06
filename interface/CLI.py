@@ -3,17 +3,6 @@ from  objects.Player import  Player
 from objects.Game import Game
 from data.database import *
 
-#short_command_dict = {'u':'go up', 'd':'go down', 
-#                     'l':'go left', 'r':'go right',
-#                     'k':'keep'}
-
-#global_config_dict = {'max_labyrinth_size':10,
-#                      'min_labyrinth_size':4,
-#                      'num_holes':5}
-
-#standart_start_config = {'num_holes':5, 'inventory':[], 'objects':{}}
-
-#gameplay_possible_command = list(global_config_dict.keys()) + ['finish', 'cheatcode', 'save'] + list(short_command_dict.keys())
 
 class CLInteface:
     start_menu_command = ['start', 'load', 'finish']

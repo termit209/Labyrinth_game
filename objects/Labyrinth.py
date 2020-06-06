@@ -2,17 +2,15 @@
 import random
 import numpy as np
 
-
-
-
 from data.database import dict_icon_labyrinth_object, next_cell
 
 
-class River():
-    def __init__(self, list_coordinates):
+class River:
+    def __init__(self, lenght_river, list_coordinates):
         self.list_coordinates =  list_coordinates
         self.source = list_coordinates[0]
         self.end = list_coordinates[-1]
+        self.lenght_river = lenght_river
 
 class Wormholes:
     def __init__(self, num_holes, list_coordinates):
@@ -24,11 +22,6 @@ class Treasure:
     def __init__(self, coordinate):
         self.coordinate = coordinate
 
-
-class River:
-    def __init__(self, lenght_river, coordinates):
-        self.lenght_river = lenght_river
-        self.coordinates = coordinates
 
 class Labyrinth():
     def __init__(self, size, dict_objects):
@@ -120,14 +113,8 @@ class Labyrinth():
         self.map_labyrinth[coordinate_treasure[0]][coordinate_treasure[1]] = dict_icon_labyrinth_object['free_cell']
         self.dict_object.pop('treasure')
 
+    def get_labyrinth_map(self):
+        return np.copy(self.map_labyrinth)
 
-if __name__ == '__main__':
-    test_lab = Labyrinth(6, {})
-    test_lab.generate_monoliths()
-    test_lab.generate_walls()
-    test_lab.generate_exit()
-    #test_lab.generate_treasure()
-    #test_lab.generate_warmholes(2)
-    test_lab.generate_river(4)
-    print(test_lab.map_labyrinth)
-    #print(test_lab.dict_object['holes'].list_coordinates)
+    def get_doorstep_coord(self):
+        return self.exit_doorstep_coord

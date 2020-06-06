@@ -31,10 +31,10 @@ class Game():
             self.game_labyrinth.generate_river(self.config['lenght_river'])
 
     def create_cheker(self):
-        self.checker = Checker(self.game_labyrinth)
+        self.checker = Checker(self.game_labyrinth.get_labyrinth_map())
 
     def create_player(self):
-        self.player = Player(self.game_labyrinth.exit_doorstep_coord, self.config['inventory'],  self.config['health'])
+        self.player = Player(self.game_labyrinth.get_doorstep_coord(), self.config['inventory'],  self.config['health'])
 
     def create_bear(self):
         self.bear = Player(self.game_labyrinth.get_free_cell(), {}, 1)
@@ -43,7 +43,7 @@ class Game():
         self.step_player(command)
         self.step_bear()
         self.meeting_bear()
-        if not self.is_alive():
+        if not self.player_is_alive():
             self.game_end = True
             self.game_result = 'lose'
         
@@ -87,24 +87,24 @@ class Game():
             self.bear.change_coordinate_river(river_coordinates)
 
     def show_map(self):
-        map_labyrinth = np.copy(self.game_labyrinth.map_labyrinth)
+        map_labyrinth = self.game_labyrinth.get_labyrinth_map()
         coordin_player = self.player.coordinate_location
         coordin_bear = self.bear.coordinate_location
-        map_labyrinth[coordin_player[0]][coordin_player[1]] = 'P'
-        map_labyrinth[coordin_bear[0]][coordin_bear[1]] = 'B'
+        map_labyrinth[coordin_player[0]][coordin_player[1]] = dict_icon_labyrinth_object['player']
+        map_labyrinth[coordin_bear[0]][coordin_bear[1]] = dict_icon_labyrinth_object['bear']
         print(map_labyrinth)
 
     def meeting_bear(self):
         bear_location = self.bear.coordinate_location
         player_location = self.player.coordinate_location
         if np.sum(bear_location - player_location) < 0:
-            self.damage()
+            self.damage_player()
             print('damage from bear')
     
-    def damage(self):
+    def damage_player(self):
         self.player.health -= 1
 
-    def is_alive(self):
-        return self.player.health < 1
+    def player_is_alive(self):
+        return self.player.health >= 1
 
 
