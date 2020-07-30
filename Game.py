@@ -66,7 +66,7 @@ class Game():
                 self.player.change_sate_by_step(command)
             if command_respond == 'step executed, open exit':
                 self.game_end = True
-            river_coordinates = self.game_labyrinth.dict_object['river'].coordinates
+            river_coordinates = self.game_labyrinth.dict_object['river'].list_coordinates
             if list(self.player.coordinate_location) in [list(i) for i in river_coordinates]:
                 self.player.change_coordinate_river(river_coordinates)
 
@@ -82,7 +82,7 @@ class Game():
                 self.bear.change_location_by_teleport(coordinate_holes)
         else:
             self.bear.change_sate_by_step(random_step_command)
-        river_coordinates = self.game_labyrinth.dict_object['river'].coordinates
+        river_coordinates = self.game_labyrinth.dict_object['river'].list_coordinates
         if list(self.bear.coordinate_location) in [list(i) for i in river_coordinates]:
             self.bear.change_coordinate_river(river_coordinates)
 
@@ -97,7 +97,7 @@ class Game():
     def meeting_bear(self):
         bear_location = self.bear.coordinate_location
         player_location = self.player.coordinate_location
-        if np.sum(bear_location - player_location) < 0:
+        if np.absolute(np.sum(bear_location - player_location)) < 0:
             self.damage_player()
             print('damage from bear')
     

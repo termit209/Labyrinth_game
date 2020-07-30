@@ -12,6 +12,7 @@ class River:
         self.end = list_coordinates[-1]
         self.lenght_river = lenght_river
 
+
 class Wormholes:
     def __init__(self, num_holes, list_coordinates):
         self.num_holes = num_holes

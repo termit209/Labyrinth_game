@@ -1,9 +1,7 @@
 
 from data.database import *
-from objects.Game import Game
-from interface.CLI import CLInteface
-from objects.Game import Game
-from objects.Game import Game
+
+
 
 test = 'CLI'
 
@@ -48,6 +46,7 @@ elif test == 'checker':
     #    print(command, test_checker.check_command(command, test2_player))
 
 elif test == 'game':
+    from Game import Game
     test_config = {'size':7, 'num_holes':3, 'inventory':[], 'objects':{}, 'health':3, 'lenght_river':4}
     test_game = Game(test_config)
     test_game.create_labyrinth()
@@ -65,5 +64,6 @@ elif test == 'game':
 
 
 if test == "CLI":
+    from interface.CLI import CLInteface
     test_int = CLInteface()
     test_int.main_menu()

@@ -1,6 +1,6 @@
 
 from  objects.Player import  Player
-from objects.Game import Game
+from Game import Game
 from data.database import *
 
 

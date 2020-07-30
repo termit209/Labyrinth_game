@@ -13,7 +13,7 @@ dict_icon_labyrinth_object = {'wall':'W',
                               'free_cell': ' ',
                               'river':'R',
                               'bear':'B',
-                              'Player':'P'}
+                              'player':'P'}
 
 next_cell = {'up':np.array((-1, 0)), 'down':np.array((1, 0)), 
                      'left':np.array((0, -1)), 'right':np.array((0, 1)),}
@@ -29,3 +29,17 @@ global_config_dict = {'max_labyrinth_size':10,
 standart_start_config = {'num_holes':5, 'inventory':[], 'objects':{}, 'lenght_river':4, 'health':3}
 
 gameplay_possible_command = list(step_by_command.keys()) + ['finish', 'cheatcode', 'save'] + list(short_command_dict.keys())
+
+action_respond_message = {}
+
+#smile = {
+#' (>_<) ' + '\n', 
+#'(^_-)' + '\n', 
+#'\(^_^)/ ', 'Congratulation ', sep='\n'
+#'(╯︵╰,) ', 'Lose, try again next time ', sep='\n'
+#'\n', '(^_^)/'
+#'(u_u)/'
+#'(^_^)?'
+#}
+
+start_menu_command = ['start', 'load', 'finish']

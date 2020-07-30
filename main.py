@@ -1,6 +1,6 @@
 
 from data.database import *
-from objects.Game import Game
+from Game import Game
 from interface.CLI import CLInteface
 
 
